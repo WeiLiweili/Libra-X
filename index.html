@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Libra-gamess interface by alexvakimov</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Libra-gamess interface</h1>
+        <p class="header">quantum chemistry, nonadiabatic dynamics, GAMESS, Quantum Espresso</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/alexvakimov/libra-gamess_interface/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/alexvakimov/libra-gamess_interface/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/alexvakimov/libra-gamess_interface">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/alexvakimov">alexvakimov</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="libra-gamess_interface" class="anchor" href="#libra-gamess_interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Libra-GAMESS_interface</h1>
+
+<p>This file introduces how to execute Libra-GAMESS_interface.</p>
+
+<ol>
+<li><p>Install Libra and GAMESS on your PC or server.
+For installation, access the websites below:
+Libra:  <a href="http://www.acsu.buffalo.edu/%7Ealexeyak/libra/index.html">http://www.acsu.buffalo.edu/~alexeyak/libra/index.html</a>
+GAMESS:  <a href="http://www.msg.ameslab.gov/gamess/">http://www.msg.ameslab.gov/gamess/</a></p></li>
+<li><p>Create a working directory,say, /home/work . </p></li>
+<li>
+<p>There, create input files(*.inp).(H2O.inp and 23waters.inp in ".../libra-gamess_interface/run" are the simple examples.)
+For more details about how to create that, 
+please see the website <a href="http://www.msg.ameslab.gov/gamess/GAMESS_Manual/input.pdf">http://www.msg.ameslab.gov/gamess/GAMESS_Manual/input.pdf</a> .
+Here, Keep in mind 3 things.
+A. Only semi-empirical methods have been connected to libra so far;
+  set GBASIS=MNDO, AM1, PM3, or RM1 in $BASIS section. 
+B. Set RUNTYP=GRADIENT in $CONTROL section.
+C. Use cartesian coordinates in $DATA section like this:</p>
+
+<p>Cn 1</p>
+
+<p>C  6.000000 4.377921 -4.769170 -2.758971
+  C  6.000000 3.858116 -4.331728 -3.995136
+  C  6.000000 2.478331 -4.387937 -4.267327
+                       .
+                       .
+                       .</p>
+
+<ul>
+<li>set blank line between "Cn 1" and 1st coordinate line.</li>
+</ul>
+</li>
+<li><p>For convinience, copy run_gms.py in ".../libra-gamess_interface/run" to the working place.</p></li>
+<li><p>Modify copied run_gms.py for calculation.
+Concretely, set variables for GAMESS, Molecular Dynamics(MD), excited electron dynamics, and debugs.
+See the input manual in ".../libra-gamess_interface/run" to know more about the variables.</p></li>
+<li><p>copy elements.txt in ".../libra-gamess_interface/run" to the working directory.</p></li>
+<li><p>Create "res" and "sd_ham" directories under the working place, where the results will be output.</p></li>
+<li><p>When the precedures above are finished, it is the time to execute this program.
+Here, 2 types of execution can be used.
+A. Only invoke "python run_gms.py" in the working place.
+B. Use queuing system. submit_templ_gms.lsf or submit_templ_gms.slurm in ".../libra-gamess_interface/run" are the simple examples for using this.
+  Modify the files following your queuing system.   </p></li>
+<li><p>After the calculation finished, the results will be set in "res" directory.</p></li>
+</ol>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
